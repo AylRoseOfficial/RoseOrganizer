@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="RoseOrganizer.Pages.GalleryGrid_Template"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RoseOrganizer.Pages"
+             mc:Ignorable="d" Height="250" Width="170">
+    <Grid>
+        <!-- Grid: Artwork Image-->
+        <Border CornerRadius="5" 
+                Margin="0,0,0,25">
+            <Border.Background>
+                <ImageBrush x:Name="Data_Artwork" 
+                            Stretch="Fill" 
+                            ImageSource="pack://application:,,,/Assets/Avatars/Artwork_Example.png"/>
+            </Border.Background>
+        </Border>
+        <TextBlock x:Name="Data_Name" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,230,0,0" TextWrapping="Wrap" 
+                   Text="Absolute Duo" 
+                   VerticalAlignment="Top" 
+                   Height="20" Width="170" 
+                   TextAlignment="Center" 
+                   Foreground="Black" 
+                   FontWeight="Normal" 
+                   FontFamily="Lato"/>
+    </Grid>
+</UserControl>

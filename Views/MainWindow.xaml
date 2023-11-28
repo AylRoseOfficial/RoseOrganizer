@@ -1,0 +1,102 @@
+﻿<Window x:Class="RoseOrganizer.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+        mc:Ignorable="d" Name="home" Title="Rose Organizer" Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow"
+        Background="Transparent" ResizeMode="CanMinimize" WindowState="Normal" Icon="/AppIcon.ico">
+
+    <Border 
+        Background="{DynamicResource PrimaryBackgroundColor}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Comienzo: BARRA LATERAL-->
+            <Border 
+                Background="{DynamicResource SecundaryBackgroundColor}">
+                <Grid 
+                    x:Name="gridMenu" 
+                    Width="60">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Botones Radio -->
+                    <StackPanel 
+                        Grid.Row="3">
+                        <RadioButton 
+                            x:Name="rdHome" 
+                            IsChecked="True"
+                            Style="{DynamicResource MenuRadioButtonStyle}" 
+                            Tag="{DynamicResource Home}"
+                            Click="rdHome_Click"/>
+                        <RadioButton 
+                            x:Name="rdGallery" 
+                            Style="{DynamicResource MenuRadioButtonStyle}" 
+                            Tag="{DynamicResource Gallery}" 
+                            Click="rdGallery_Click"/>
+                        <RadioButton 
+                            x:Name="rdAdd"                           
+                            Style="{DynamicResource MenuRadioButtonStyle}" 
+                            Tag="{DynamicResource Add}"
+                            Command="{Binding ShowWindowCommand}"/>
+                        <RadioButton 
+                            x:Name="rdAbout" 
+                            Style="{DynamicResource MenuRadioButtonStyle}" 
+                            Tag="{DynamicResource About}" 
+                            Margin="0 5 0 5" 
+                            Click="rdAbout_Click"/>
+                    </StackPanel>
+
+                    <!-- Foto de Perfil -->
+                    <StackPanel Grid.Row="3" 
+                                VerticalAlignment="Top" 
+                                Orientation="Horizontal" 
+                                Margin="0,408,0,0">
+                        <Ellipse Width="40" 
+                                 Height="40" 
+                                 Margin="10 0 0 0" 
+                                 MouseLeftButtonDown="Profile_MouseClick">
+                            <Ellipse.Fill>
+                                <ImageBrush 
+                                    x:Name="ProfilePicture" 
+                                    ImageSource="pack://application:,,,/Assets/Avatars/avatar-2.png"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <!-- Final: BARRA LATERAL-->
+
+            <!-- Comienzo: FRAMES/PAGINAS SECCION -->
+            <Grid 
+                Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!-- Frames de Paginas -->
+                <Grid Grid.Row="1" 
+                      Margin="10,10,10,0">
+                    <Frame x:Name="PGallery" 
+                           NavigationUIVisibility="Automatic"></Frame>
+                    <Frame x:Name="AboutPage" 
+                           NavigationUIVisibility="Automatic"></Frame>
+                    <Frame x:Name="HomePage" 
+                           NavigationUIVisibility="Automatic"></Frame>
+                </Grid>
+            </Grid>
+            <!-- Final: FRAMES/PAGINAS SECCION -->
+            
+        </Grid>
+    </Border>
+</Window>
