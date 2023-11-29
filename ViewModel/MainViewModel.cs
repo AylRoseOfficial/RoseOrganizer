@@ -5,28 +5,34 @@ using RoseOrganizer.Models;
 using RoseOrganizer.Pages;
 using RoseOrganizer.Views;
 
-namespace RoseOrganizer.ViewModel
-{
+namespace RoseOrganizer.ViewModel {
     public class MainViewModel {
+        
+        // Public Instance of Object
         public static MainViewModel Instancia;
-        // ICommand Instances
+
+        // ICommand Functions
         public ICommand ShowWindowCommand { get; set; }
 
-        // Main Anime Collection Array
+        // Bool Show Window
+        private bool CanShowWindow(object obj) { return true; }
+
+        // Primary Anime - Collection Array
         public ObservableCollection<Anime> Animes { get; set; }
-        // Secundary Template Grid Array
+
+        // Secundary Anime - Template Grid Array
         public ObservableCollection<GalleryGrid_Template> Templates { get; set; }
 
         public MainViewModel() {
             Instancia = this;
-            /// Return data from database for anime (AnimeManager)
+
+            // Return data from database for animes array
             Animes = AnimeManager.GetAnimes();
-            /// New Entry Window Command
+            // New Entry Window Command to Open
             ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow);
         }
-        private bool CanShowWindow(object obj) {
-            return true;
-        }
+
+        // Show Window Add Anime
         private void ShowWindow(object obj) {
             AddAnime addAnimeWin = new AddAnime();
             addAnimeWin.Show();

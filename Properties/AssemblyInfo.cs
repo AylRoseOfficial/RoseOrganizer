@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyCompany("D'Rose Studios")]
 [assembly: AssemblyProduct("Rose Organizer")]
 [assembly: AssemblyCopyright("Copyright ©2023")]
-[assembly: AssemblyTrademark("Ayl'R Studios")]
+[assembly: AssemblyTrademark("D'Rose Studios")]
 [assembly: AssemblyCulture("")]
 
 // Si establece ComVisible en false, los tipos de este ensamblado no estarán visibles 

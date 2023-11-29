@@ -9,78 +9,80 @@ using System.Windows.Media.Imaging;
 namespace RoseOrganizer.Views {
     public partial class MainWindow : Window {
 
-        // Main Variables (Global)
+        // Public Instance of Object
         public static MainWindow Instancia;
+
+        // Main Variables (Global)
         public MainViewModel mainViewModel = new MainViewModel();
         public OpenFileDialog FileDialog = new OpenFileDialog();
 
-        /// Initialize Prompts of the Program
+        // Initialize Prompts of the Program
         public MainWindow() {
-            // Instancia & Init de Programa 
+            // Instance and Init
             Instancia = this; 
             InitializeComponent();
            
             this.DataContext = mainViewModel;
 
-            // Pagina de Inicio (Crear)
+            // Create Main Pages
             PGallery.Navigate(new System.Uri("Pages/GalleryPage.xaml", UriKind.RelativeOrAbsolute));
             HomePage.Navigate(new System.Uri("Pages/HomePage.xaml", UriKind.RelativeOrAbsolute));        
 
-            // Init Propiedas de Programa Principal
+            // Set User Preferences
             SetUserProfileImage();
         }
 
         /// Pages Functions
         private void rdHome_Click(object sender, RoutedEventArgs e) {
-            // Colocar en Hidden
+            // Set it Hidden
             AboutPage.Visibility = Visibility.Hidden;
             PGallery.Visibility = Visibility.Hidden;
 
-            // Enseñar Nueva Pagina
+            // Show new Page
             HomePage.Visibility = Visibility.Visible;
             HomePage.Navigate(new System.Uri("Pages/HomePage.xaml", UriKind.RelativeOrAbsolute));
         }
         private void rdGallery_Click(object sender, RoutedEventArgs e) {
-            // Colocar en Hidden
+            // Set it Hidden
             AboutPage.Visibility = Visibility.Hidden;
             HomePage.Visibility = Visibility.Hidden;
 
-            // Enseñar Nueva Pagina
+            // Show new Page
             PGallery.Visibility = Visibility.Visible;
             PGallery.Navigate(new System.Uri("Pages/GalleryPage.xaml", UriKind.RelativeOrAbsolute));
         }
         private void rdAbout_Click(object sender, RoutedEventArgs e) {
-            // Colocar en Hidden
+            // Set it Hidden
             HomePage.Visibility = Visibility.Hidden;
             PGallery.Visibility = Visibility.Hidden;
 
-            // Enseñar Nueva Pagina
+            // Show new Page
             AboutPage.Visibility = Visibility.Visible;
             AboutPage.Navigate(new System.Uri("Pages/AboutPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         /// Other events featured
-        // Event "Change user profile image"
+        // Event - "Change user profile image"
         private void Profile_MouseClick(object sender, RoutedEventArgs e) {
-            /// Init de File Dialog
+            // Init of File Dialog
             FileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             FileDialog.Filter = "Media Documents |*.img;*.png;*.jpeg;*.jpg";
             FileDialog.FilterIndex = 2; FileDialog.DefaultExt = ".png";
 
-            /// Mostrar File Dialog
+            // Show File Dialog
             if (FileDialog.ShowDialog() == true) {
-                /// Set FileName & New File Path 
+                // Set FileName & New File Path 
                 var FileName = FileDialog.FileName;
                 var NewFilePath = GetUniqueFilePath(FileName);
 
-                /// Copiar Documento a Carpeta Especial
+                // Copy new image to save data folder
                 File.Copy(FileName, NewFilePath);
 
-                /// Guardar nueva imagen en cache settings
+                // Save image in user preferences
                 Properties.Settings.Default.ProfileImage = NewFilePath;
                 Properties.Settings.Default.Save();
 
-                /// Cambiar imagen de perfil a la nueva
+                // Change image of user to new one
                 ProfilePicture.ImageSource = new BitmapImage(new Uri(NewFilePath));
             }
         }
@@ -116,15 +118,15 @@ namespace RoseOrganizer.Views {
         }
         // Set image to user (default or added)
         public void SetUserProfileImage() {
-            /// Poner Imagen Default o Guardada
+            // Set or Get Image of User
             if (string.IsNullOrEmpty(Properties.Settings.Default.ProfileImage))
                 ProfilePicture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Avatars/Artwork_Example.png"));
             else
                 ProfilePicture.ImageSource = new BitmapImage(new Uri(Properties.Settings.Default.ProfileImage));
         }
-        // Return temporal image data
+        // Temporal return for Image Data
         public string GetTempArtwork() {
-            /// Retornar la imagen temporal al crear grid
+            // Return temporal image when creating grid instance
             return AddAnime.Instancia.TempArtwork;
         }
     }
